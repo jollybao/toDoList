@@ -57,6 +57,17 @@
 
 </script>
     <style>
+        html {
+            position:static;
+            height: 100%;
+            background: white; /* For browsers that do not support gradients */
+            background: -webkit-linear-gradient(0deg,white, green) no-repeat; /* For Safari 5.1 to 6.0 */
+            background: -o-linear-gradient(0deg,white, green) no-repeat; /* For Opera 11.1 to 12.0 */
+            background: -moz-linear-gradient(0deg,white, green) no-repeat; /* For Firefox 3.6 to 15 */
+            background: linear-gradient(0deg,white, green) no-repeat; /* Standard syntax */
+            background: linear-gradient(0deg, white, green 80%) ;
+            background-attachment: fixed;
+        }
         #register{
 	        position: absolute;
 	        top: 0px;

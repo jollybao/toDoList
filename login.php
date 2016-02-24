@@ -51,7 +51,7 @@
 			setcookie('remember',$rem);
 			// We create the Remember cookie
             echo aaaaaaaa;
-            header("Location: toDoList.php");
+            header("Location: ToDoList.php");
 	        exit;      
 		}
 		else $err[]='Wrong username and/or password!';
