@@ -14,18 +14,22 @@
     session_set_cookie_params(7*24*60*60);
     // expire after one week
     session_start();
-
+    print_r($_SESSION); 
+    //echo $_SESSION['rememberMe'];   
+   // echo $_SESSION['psw'];
+   //session_destroy();
+    echo $_COOKIE["remember"];
+ 
     if($_SESSION['id'] && !isset($_COOKIE['remember']) && !$_SESSION['rememberMe']){
 	    $_SESSION = array();
 	    session_destroy();
     }
-    /*
+   /* 
     if(isset($_GET['logoff'])){
-        echo 'logoff'
 	    $_SESSION = array();
 	    session_destroy();
-	    header("Location: index.html");
-	    exit;
+	   // header("Location: index.html");
+	  //  exit;
     }
     */
     if($_POST['Submit']=='Login'){
@@ -34,38 +38,30 @@
 		$name = htmlspecialchars($_POST['user_name']);
 		$psw = htmlspecialchars($_POST['psw']);
 		$rem = $_POST['rememberMe'];
-        $sql = "SELECT id,name FROM mydb.member WHERE name='$name' AND password='$psw'";
+        $sql = "SELECT * FROM mydb.member WHERE name='$name' AND password='$psw'";
 		$result = $conn->query($sql);
         $row = $result->fetch_assoc();
-             
-        mysql_close($conn);
+
 
 		if($row['name']){
 		// If everything is OK login
-		    $_SESSION['usr']=$row['name'];
+		    $_SESSION['usr'] = $row['name'];
 		    $_SESSION['id'] = $row['id'];
+            $_SESSION['psw'] = $row['password'];
 		    $_SESSION['rememberMe'] = $rem;
-
 			// Store some data in the session
 
 			setcookie('remember',$rem);
 			// We create the Remember cookie
-            echo aaaaaaaa;
             header("Location: ToDoList.php");
 	        exit;      
 		}
-		else $err[]='Wrong username and/or password!';
+		//else $err[]='Wrong username and/or password!';
 	}
  
-	if($err){
-	    $_SESSION['msg']['login-err'] = implode('<br />',$err);
-	    // Save the error messages in the session
-        for($x = 0; $x < count($err); $x++) {
-        echo $err[$x];
-    
-        }
+	if($err){ 
 	    header("Location: index.php");
 	    exit;
     }
-  	 
+mysqli_close($conn);  	 
 ?>

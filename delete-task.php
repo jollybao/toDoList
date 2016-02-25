@@ -12,21 +12,13 @@ if(! $conn ) {
 /*echo 'Connected successfully'.'<br>';*/
 session_name("Login");
 session_start();
-//print_r($_SESSION);   
 
 $todo = $_REQUEST["q"];
 $id = $_SESSION['id'];
+echo $todo;
+$sql = "Delete FROM mydb.list
+    WHERE id = '$id' AND todo = '$todo'";
 
-$sql = "SELECT * FROM mydb.list
-    WHERE id = '$id' ";
-
-$result = $conn->query($sql);
-
-if($result->num_rows < 20){
-    echo "display";
-    $sql2 = "INSERT INTO mydb.list(id,todo)
-    VALUES('$id','$todo')";
-    $conn->query($sql2);           
-}
+$conn->query($sql);
 $conn->close();
 ?>

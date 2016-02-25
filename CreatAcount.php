@@ -3,7 +3,7 @@
 <head>
 <script>
     function verify(obj) {
-        str = obj.value;
+        var str = obj.value;
         if (obj.name == "username") {
             if (str.length == 0) {
                 document.getElementById("name").innerHTML = "";
