@@ -1,24 +1,16 @@
 
 <?php
-    $dbhost = '127.0.0.1';
-	$dbuser = 'root';
-	$dbpass = '86561911';
-	$conn = mysqli_connect($dbhost, $dbuser, $dbpass);
-    if(! $conn ) { 
-	    ie('Could not connect: ' . mysqli_error());
-	}
-   
-	echo 'Connected successfully';
+    require("connect.php");
     
     session_name('Login');
     session_set_cookie_params(7*24*60*60);
     // expire after one week
     session_start();
-    print_r($_SESSION); 
+    //print_r($_SESSION); 
     //echo $_SESSION['rememberMe'];   
    // echo $_SESSION['psw'];
    //session_destroy();
-    echo $_COOKIE["remember"];
+   // echo $_COOKIE["remember"];
  
     if($_SESSION['id'] && !isset($_COOKIE['remember']) && !$_SESSION['rememberMe']){
 	    $_SESSION = array();
@@ -56,12 +48,12 @@
             header("Location: ToDoList.php");
 	        exit;      
 		}
-		//else $err[]='Wrong username and/or password!';
+		else{ 
+	        header("Location: index.php");
+	        exit;
+        }
 	}
  
-	if($err){ 
-	    header("Location: index.php");
-	    exit;
-    }
-mysqli_close($conn);  	 
+	
+$conn->close();  	 
 ?>
